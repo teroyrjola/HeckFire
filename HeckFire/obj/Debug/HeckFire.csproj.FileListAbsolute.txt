@@ -1,0 +1,6 @@
+c:\users\tero\documents\visual studio 2017\Projects\HeckFire\HeckFire\bin\Debug\HeckFire.exe.config
+c:\users\tero\documents\visual studio 2017\Projects\HeckFire\HeckFire\bin\Debug\HeckFire.exe
+c:\users\tero\documents\visual studio 2017\Projects\HeckFire\HeckFire\bin\Debug\HeckFire.pdb
+c:\users\tero\documents\visual studio 2017\Projects\HeckFire\HeckFire\obj\Debug\HeckFire.csprojResolveAssemblyReference.cache
+c:\users\tero\documents\visual studio 2017\Projects\HeckFire\HeckFire\obj\Debug\HeckFire.exe
+c:\users\tero\documents\visual studio 2017\Projects\HeckFire\HeckFire\obj\Debug\HeckFire.pdb
