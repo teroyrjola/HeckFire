@@ -9,6 +9,8 @@ namespace HeckFire
 {
     class HeckFireQuestCalculator
     {
+        public const int DefaultQuestTimePairArrayLength = 24;
+
         private static readonly DateTime KnownStartOfAQuestCycle =
             new DateTime(2017, 07, 26, 00, 00, 00);
 
@@ -37,7 +39,10 @@ namespace HeckFire
             "18", "19", "20", "21", "22", "23"
         };
 
-        internal void InitializeQuestListForHours(int hours)
+        /// <summary>
+        /// Initializes HoursWithQuests array with optional given hours, or the default value
+        /// </summary>
+        internal void InitializeQuestListForHours(int hours = DefaultQuestTimePairArrayLength)
         {
             int hoursFromKnownCycle = (DateTime.Now - KnownStartOfAQuestCycle).Hours;
 
@@ -54,12 +59,11 @@ namespace HeckFire
             }
         }
 
-
-        //internal Func<string> GetListOfTimesAndQuests = ()
-        //    => $"{string.Join(" ", Times.Zip(Quests, (time, quest) => $"{time}: {quest.Name()}").ToArray())}";
-
         internal string GetListOfTimesAndQuests()
         {
+            if (HoursWithQuests.IsEmptyNullOrOld())
+                InitializeQuestListForHours();
+
             var timesAndQuests = 
 
                 HoursWithQuests.Select(pair => pair.Time)
@@ -74,29 +78,27 @@ namespace HeckFire
 
         internal Quest GetCurrentQuest()
         {
-            if (HoursWithQuests[0].Time != DateTime.Now.Hour.ToString("00")) InitializeQuestListForHours(1);
+            if (HoursWithQuests.IsEmptyNullOrOld())
+                InitializeQuestListForHours();
 
             return HoursWithQuests[0].Quest;
         }
 
         internal Quest GetNextQuest()
+            {
+                if (HoursWithQuests.IsEmptyNullOrOld())
+                InitializeQuestListForHours();
+
+                return HoursWithQuests[0].Quest;
+            }
+
+        internal string GetTimeWhenNext(Quest quest)
         {
-            if (HoursWithQuests[0].Time != DateTime.Now.Hour.ToString("00")) InitializeQuestListForHours(1);
+            if (HoursWithQuests.IsEmptyNullOrOld())
+                InitializeQuestListForHours();
 
-            return HoursWithQuests[1].Quest;
+            return HoursWithQuests.FirstOrDefault(pair => pair.Quest.Equals(quest)).Time;
         }
-
-        //internal string GetTimeWhenNext(Quest quest)
-        //{
-        //    int currentHour = DateTime.Now.Hour;
-
-        //    int[] questTimes = HoursWithQuests.Where(q => q.Value == quest)
-        //        .Select(q => Convert.ToInt32(q.Key))
-        //        .ToArray();
-
-        //    return questTimes.Where(q => q > currentHour)
-        //        .DefaultIfEmpty(questTimes[0]).First().ToString("00");
-        //}
 
         //internal TimeSpan GetTimeUntil(Quest quest)
         //{

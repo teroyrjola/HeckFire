@@ -10,7 +10,7 @@ namespace HeckFire
         static void Main(string[] args)
         {
             HeckFireQuestCalculator calculator = new HeckFireQuestCalculator();
-            calculator.InitializeQuestListForHours(24);
+            //calculator.InitializeQuestListForHours();
 
             Console.WriteLine(calculator.GetListOfTimesAndQuests());
 
