@@ -65,7 +65,7 @@ namespace HeckFire
                 InitializeQuestListForHours();
 
             var timesAndQuests = 
-
+                
                 HoursWithQuests.Select(pair => pair.Time)
                 .Zip
                 (HoursWithQuests.Select(pair => pair.Quest),
@@ -97,19 +97,19 @@ namespace HeckFire
             if (HoursWithQuests.IsEmptyNullOrOld())
                 InitializeQuestListForHours();
 
-            return HoursWithQuests.FirstOrDefault(pair => pair.Quest.Equals(quest)).Time;
+            return HoursWithQuests.Skip(1).FirstOrDefault(pair => pair.Quest.Equals(quest)).Time;   //Skip 1st element if the quest happens to be ongoing.
         }
 
-        //internal TimeSpan GetTimeUntil(Quest quest)
-        //{
-        //    TimeSpan currentTime = DateTime.Now.TimeOfDay;
-        //    TimeSpan nextQuestTime = TimeSpan.Parse(GetTimeWhenNext(quest) + ":05");
+        internal TimeSpan GetTimeUntilNext(Quest quest)
+        {
+            if (HoursWithQuests.IsEmptyNullOrOld())
+                InitializeQuestListForHours();
 
-        //    if (nextQuestTime < currentTime) nextQuestTime += TimeSpan.FromHours(24);
-        //    TimeSpan difference = nextQuestTime - currentTime;
+            TimeSpan currentTime = DateTime.Now.TimeOfDay;
+            TimeSpan questStartTime = TimeSpan.Parse(GetTimeWhenNext(quest) + ":05");
 
-        //    return difference;
-        //}
+            return questStartTime.Subtract(currentTime);
+        }
 
         //internal Quest GetQuestAfterHours(double hrs)
         //{
