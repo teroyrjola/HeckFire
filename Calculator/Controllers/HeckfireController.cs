@@ -14,20 +14,26 @@ namespace Calculator.Controllers
             this.calculator = new HeckFireQuestCalculator();
         }
         // GET: Result
-        public ActionResult CurrentQuest()
+        public ActionResult Main()
         {
-            return View("CalculationResult", new CalculationResult(calculator.GetCurrentQuest()));
+            return View("Main");
+        }
+        
+        public string CurrentQuest()
+        {
+            return calculator.GetCurrentQuest().Name();
         }
 
         public ActionResult NextQuest()
         {
-            return View("CalculationResult", new CalculationResult(calculator.GetNextQuest()));
+            return Content("CalculationResult", new CalculationResult(calculator.GetNextQuest()).ResultString);
         }
 
-        public ActionResult GetTimeWhenNext(string questNumber)
+        [HttpGet]
+        public ActionResult GetTimeWhenNext(MainModel model)
         {
             int questId = 0;
-            if (int.TryParse(questNumber, out questId)){
+            if (int.TryParse(model.QuestId, out questId)){
 
                 if (questId < 0 || 5 < questId) return View("Error");
 
@@ -36,7 +42,7 @@ namespace Calculator.Controllers
                 return View("CalculationResult", new CalculationResult(calculator.GetTimeWhenNext(quest)));
             }
 
-            return Content(questNumber);
+            return Content(model.QuestId);
         }
     }
 }

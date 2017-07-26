@@ -1,0 +1,29 @@
+﻿@model  Calculator.Models.MainModel
+
+@{
+    ViewBag.Title = "Main";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<header><title>HeckFire</title></header>
+<body>
+
+@using (Html.BeginForm("GetTimeWhenNext", "HeckFire", FormMethod.Get))
+{
+    @Html.TextBoxFor(model => model.QuestId)
+    <button id="test" type="submit">NextOne</button>
+}
+
+<script type="text/javascript" src="~/Scripts/script.js"></script>
+
+<input id="CurrentBtn" type="button" value="Current"/>
+<input id="NextBtn" type="button" value="Next"/>
+<button type="button" onclick="output.value = '@Html.Action("CurrentQuest", "HeckFire")'">Current quest</button>
+<button type="button" onclick="output.value = '@Html.Action("NextQuest", "HeckFire")'">Next quest</button>
+
+<input id="TimeWhenBtn" type="button" value="TimeWhen"/>
+<input id="QuestId" type="text" placeholder="Quest id" name="QuestId" value="2"/>
+<br/>
+
+&nbsp;
+<input id="output" type="text"/>
+</body>

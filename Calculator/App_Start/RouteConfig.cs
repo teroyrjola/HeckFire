@@ -14,14 +14,9 @@ namespace Calculator
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "HeckFire",
-                url: "{controller}/GetTimeWhenNext/{id}",
-                defaults: new { controller = "HeckFire", action = "Index", questNumber = "questNumber" }
-            );
-            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "HeckFire", action = "Index", questNumber = UrlParameter.Optional }
+                defaults: new { controller = "HeckFire", action = "Main", id = UrlParameter.Optional }
             );
         }
     }
