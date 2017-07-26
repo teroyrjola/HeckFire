@@ -10,7 +10,7 @@ namespace HeckFire
         static void Main(string[] args)
         {
             HeckFireQuestCalculator calculator = new HeckFireQuestCalculator();
-            //calculator.InitializeQuestListForHours();
+            calculator.InitializeQuestListForHours();
 
             Console.WriteLine(calculator.GetListOfTimesAndQuests());
 
@@ -20,7 +20,7 @@ namespace HeckFire
 
             //Console.WriteLine(calculator.GetQuestAfterHours(4).Name());
 
-            //Console.WriteLine(calculator.GetTimeWhenNext(Quest.MonsterSlaying).PrettyStartTime());
+            Console.WriteLine(calculator.GetTimeWhenNext(Quest.MonsterSlaying).PrettyQuestDuration());
 
             //Console.WriteLine(calculator.GetTimeUntil(Quest.MonsterSlaying).PrettyTimeSpan());
 

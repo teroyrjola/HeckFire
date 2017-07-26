@@ -52,7 +52,7 @@ namespace HeckFire
 
             for (int i = 0; i < hours +1; i++)
             {
-                int timeIndex = (i + offSetInCurrentCycle) % Times.Length;
+                int timeIndex = (i + hoursFromKnownCycle) % Times.Length;
                 int questIndex = (i + offSetInCurrentCycle) % QuestCycle.Length;
 
                 HoursWithQuests[i] = new QuestTimePair(Times[timeIndex], QuestCycle[questIndex]);
@@ -89,7 +89,7 @@ namespace HeckFire
                 if (HoursWithQuests.IsEmptyNullOrOld())
                 InitializeQuestListForHours();
 
-                return HoursWithQuests[0].Quest;
+                return HoursWithQuests[1].Quest;
             }
 
         internal string GetTimeWhenNext(Quest quest)
