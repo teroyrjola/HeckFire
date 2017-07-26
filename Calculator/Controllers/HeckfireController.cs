@@ -39,6 +39,7 @@ namespace Calculator.Controllers
 
                 Quest quest = (Quest) questId;
 
+
                 return View("CalculationResult", new CalculationResult(calculator.GetTimeWhenNext(quest)));
             }
 
