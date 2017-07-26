@@ -14,9 +14,9 @@ namespace HeckFire
 
             Console.WriteLine(calculator.GetListOfTimesAndQuests());
 
-            //Console.WriteLine(calculator.GetCurrentQuest().Name());
+            Console.WriteLine(calculator.GetCurrentQuest().Name());
 
-            //Console.WriteLine(calculator.GetNextQuest().Name());
+            Console.WriteLine(calculator.GetNextQuest().Name());
 
             //Console.WriteLine(calculator.GetQuestAfterHours(4).Name());
 

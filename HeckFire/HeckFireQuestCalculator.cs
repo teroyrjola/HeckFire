@@ -72,27 +72,19 @@ namespace HeckFire
             return result;
         }
 
-        //internal Quest GetCurrentQuest()
-        //{
-        //    Quest currentQuest;
-        //    string currentHour = DateTime.Now.Hour.ToString("00");
+        internal Quest GetCurrentQuest()
+        {
+            if (HoursWithQuests[0].Time != DateTime.Now.Hour.ToString("00")) InitializeQuestListForHours(1);
 
-        //    if (HoursWithQuests.TryGetValue(currentHour, out currentQuest))
-        //        return currentQuest;
+            return HoursWithQuests[0].Quest;
+        }
 
-        //    throw new Exception($"Quest not found for time {currentHour}!");
-        //}
+        internal Quest GetNextQuest()
+        {
+            if (HoursWithQuests[0].Time != DateTime.Now.Hour.ToString("00")) InitializeQuestListForHours(1);
 
-        //internal Quest GetNextQuest()
-        //{
-        //    Quest nextQuest;
-        //    string nextHour = (DateTime.Now.Hour + 1).ToString("00");
-
-        //    if (HoursWithQuests.TryGetValue(nextHour, out nextQuest))
-        //        return nextQuest;
-
-        //    throw new Exception($"Quest not found for time {nextHour}!");
-        //}
+            return HoursWithQuests[1].Quest;
+        }
 
         //internal string GetTimeWhenNext(Quest quest)
         //{
