@@ -1,13 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Security.AccessControl;
 
 namespace HeckFire
 {
-    class HeckFireQuestCalculator
+    internal class HeckFireQuestCalculator
     {
         public const int DefaultQuestTimePairArrayLength = 24;
 
@@ -38,6 +34,11 @@ namespace HeckFire
             "12", "13", "14", "15", "16", "17",
             "18", "19", "20", "21", "22", "23"
         };
+
+        public HeckFireQuestCalculator()
+        {
+            InitializeQuestListForHours();
+        }
 
         /// <summary>
         /// Initializes HoursWithQuests array with optional given hours, or the default value
