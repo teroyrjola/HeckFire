@@ -29,9 +29,9 @@ namespace HeckFire
             return $"{questStartTime}:05 - {nextHour:00}:00";
         }
 
-        public static bool IsEmptyNullOrOld(this QuestTimePair[] questTimeArray)
+        public static bool IsInvalid(this QuestTimePair[] questTimeArray)
         {
-            return questTimeArray == null || questTimeArray.Length == 0 ||
+            return questTimeArray == null || questTimeArray.Length < 12 ||
                    questTimeArray[0].Time != DateTime.Now.Hour.ToString("00");
         }
     }

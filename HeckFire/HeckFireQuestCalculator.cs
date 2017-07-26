@@ -61,7 +61,7 @@ namespace HeckFire
 
         internal string GetListOfTimesAndQuests()
         {
-            if (HoursWithQuests.IsEmptyNullOrOld())
+            if (HoursWithQuests.IsInvalid())
                 InitializeQuestListForHours();
 
             var timesAndQuests = 
@@ -78,7 +78,7 @@ namespace HeckFire
 
         internal Quest GetCurrentQuest()
         {
-            if (HoursWithQuests.IsEmptyNullOrOld())
+            if (HoursWithQuests.IsInvalid())
                 InitializeQuestListForHours();
 
             return HoursWithQuests[0].Quest;
@@ -86,7 +86,7 @@ namespace HeckFire
 
         internal Quest GetNextQuest()
             {
-                if (HoursWithQuests.IsEmptyNullOrOld())
+                if (HoursWithQuests.IsInvalid())
                 InitializeQuestListForHours();
 
                 return HoursWithQuests[1].Quest;
@@ -94,7 +94,7 @@ namespace HeckFire
 
         internal string GetTimeWhenNext(Quest quest)
         {
-            if (HoursWithQuests.IsEmptyNullOrOld())
+            if (HoursWithQuests.IsInvalid())
                 InitializeQuestListForHours();
 
             return HoursWithQuests.Skip(1).FirstOrDefault(pair => pair.Quest.Equals(quest)).Time;   //Skip 1st element if the quest happens to be ongoing.
@@ -102,7 +102,7 @@ namespace HeckFire
 
         internal TimeSpan GetTimeUntilNext(Quest quest)
         {
-            if (HoursWithQuests.IsEmptyNullOrOld())
+            if (HoursWithQuests.IsInvalid())
                 InitializeQuestListForHours();
 
             TimeSpan currentTime = DateTime.Now.TimeOfDay;
@@ -113,7 +113,7 @@ namespace HeckFire
 
         internal Quest GetQuestAfterHours(double hrs)
         {
-            if (HoursWithQuests.IsEmptyNullOrOld())
+            if (HoursWithQuests.IsInvalid())
                 InitializeQuestListForHours();
 
             if (HoursWithQuests.Length <= hrs)
