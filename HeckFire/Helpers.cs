@@ -6,7 +6,16 @@ namespace HeckFire
     {
         public static string PrettyTimeSpan(this TimeSpan timespan)
         {
-            return $"{timespan.Hours} hours, {timespan.Minutes} minutes and {timespan.Seconds} seconds.";
+            if (timespan.Hours > 0)
+                return $"{timespan.Hours} hours, {timespan.Minutes} minutes and {timespan.Seconds} seconds.";
+
+            if (timespan.Minutes > 0)
+                return $"{timespan.Minutes} minutes and {timespan.Seconds} seconds.";
+
+            if (timespan.Seconds > 0)
+                return $"{timespan.Seconds} seconds.";
+
+            return "Now.";
         }
 
         public static string PrettyStartTime(this string questStartTime)
