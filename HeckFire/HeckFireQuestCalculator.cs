@@ -111,24 +111,15 @@ namespace HeckFire
             return questStartTime.Subtract(currentTime);
         }
 
-        //internal Quest GetQuestAfterHours(double hrs)
-        //{
-        //    double hoursToMove = hrs;
+        internal Quest GetQuestAfterHours(double hrs)
+        {
+            if (HoursWithQuests.IsEmptyNullOrOld())
+                InitializeQuestListForHours();
 
-        //    if (hoursToMove < 0)
-        //    {
-        //        hoursToMove %= Times.Length;
-        //        hoursToMove += Times.Length;
-        //    }
-        //    else hoursToMove %= Times.Length;
+            if (HoursWithQuests.Length <= hrs)
+                InitializeQuestListForHours((int)Math.Ceiling(hrs));
 
-        //    TimeSpan queryTimeSpan = TimeSpan.FromHours(hoursToMove);
-        //    TimeSpan currentTime = DateTime.Now.TimeOfDay;
-        //    int resultHour = currentTime.Add(queryTimeSpan).Hours;
-
-        //    string keyHourString = resultHour.ToString("00");
-
-        //    return HoursWithQuests[keyHourString];
-        //}
+            return HoursWithQuests[(int) hrs].Quest;
+        }
     }
 }
