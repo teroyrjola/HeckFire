@@ -59,9 +59,18 @@ namespace Calculator.Controllers
             return View("Main", model);
         }
 
-        public ActionResult Result()
+        public ActionResult GetQuestList(MainModel model, string function)
         {
-            return View();
+            int listLength = Convert.ToInt32(model.QuestListLength);
+
+            if (listLength > 24)
+                calculator.InitializeQuestListForHours(listLength);
+
+            string result = calculator.GetListOfTimesAndQuests();
+                
+            model.QuestList = result;
+
+            return View("Main", model);
         }
     }
 }
