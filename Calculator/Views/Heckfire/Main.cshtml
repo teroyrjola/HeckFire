@@ -27,7 +27,7 @@
                 }
             </div>
             <div class="control" id="getTimeWhenOrUntilNext">
-                @using (Html.BeginForm("Calculate", "HeckFire", FormMethod.Get))
+                @using (Html.BeginForm("Calculate", "HeckFire", FormMethod.Post))
                 {
                     @Html.LabelFor(model => model.Quest)
                     @Html.EnumDropDownListFor(model => model.Quest)
@@ -36,7 +36,7 @@
                 }
             </div>
             <div class="control" id="getQuestAfterHours">
-                @using (Html.BeginForm("Calculate", "HeckFire", FormMethod.Get))
+                @using (Html.BeginForm("Calculate", "HeckFire", FormMethod.Post))
                 {
                     @Html.LabelFor(model => model.Hours)
                     @Html.TextBoxFor(model => model.Hours)
@@ -44,7 +44,7 @@
                 }
             </div>
             <div class="control" id="getQuestList">
-                @using (Html.BeginForm("GetQuestList", "HeckFire", FormMethod.Get))
+                @using (Html.BeginForm("Calculate", "HeckFire", FormMethod.Post))
                 {
                     @Html.LabelFor(model => model.QuestListLength)
                     @Html.TextBoxFor(model => model.QuestListLength)

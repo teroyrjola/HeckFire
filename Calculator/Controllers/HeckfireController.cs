@@ -17,7 +17,7 @@ namespace Calculator.Controllers
         // GET: Result
         public ActionResult Main(MainModel model)
         {
-            return View("Main", model);
+            return View(model);
         }
 
         public ActionResult Calculate(MainModel model, string function)
@@ -49,6 +49,17 @@ namespace Calculator.Controllers
                     result = calculator.GetQuestAfterHours(Convert.ToDouble(model.Hours)).Name();
                     break;
 
+                case "GetQuestList":
+                    int listLength = Convert.ToInt32(model.QuestListLength);
+
+                    if (listLength > 24)
+                        calculator.InitializeQuestListForHours(listLength);
+
+                    result = calculator.GetListOfTimesAndQuests();
+
+                    model.QuestList = result;
+                    return View("Main", model);
+
                 default:
                     result = "Error";
                     break;
@@ -56,7 +67,7 @@ namespace Calculator.Controllers
 
             model.Result = result;
 
-            return View("Main", model);
+            return View("Main",model);
         }
 
         public ActionResult GetQuestList(MainModel model, string function)
