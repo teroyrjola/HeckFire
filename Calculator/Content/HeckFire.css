@@ -1,18 +1,31 @@
 ﻿body {
 }
-.resultDiv {
-
+#main-wrap {
+    overflow:hidden
 }
-
+#sidebar {
+    float: left;
+    width: 30%
+}
 .result {
     display: inline-block;
-    width: 50%;
+    width: 30%;
     }
 
 #questList {
     float: right
 }
 
-#resultText {
+#sidebar {
+    position: center;
+}
 
+.control {
+    margin: 5% 0;
+    width: 75%;
+    max-height: 50%
+}
+
+.control button,input,select{
+    width: 100%
 }
