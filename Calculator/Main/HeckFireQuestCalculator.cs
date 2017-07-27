@@ -45,7 +45,7 @@ namespace HeckFire
         /// </summary>
         internal void InitializeQuestListForHours(int hours = DefaultQuestTimePairArrayLength)
         {
-            int hoursFromKnownCycle = (DateTime.Now - KnownStartOfAQuestCycle).Hours;
+            int hoursFromKnownCycle = (int)(DateTime.Now - KnownStartOfAQuestCycle).TotalHours;
 
             int offSetInCurrentCycle = hoursFromKnownCycle % QuestCycle.Length;
 
@@ -95,7 +95,7 @@ namespace HeckFire
 
         internal string GetTimeWhenNext(Quest quest)
         {
-            if (HoursWithQuests.IsInvalid())
+            //if (HoursWithQuests.IsInvalid())
                 InitializeQuestListForHours();
 
             return HoursWithQuests.Skip(1).FirstOrDefault(pair => pair.Quest.Equals(quest)).Time;   //Skip 1st element if the quest happens to be ongoing.
