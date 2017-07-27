@@ -6,6 +6,12 @@
     ViewBag.Title = "Main";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/script.js")"></script>
+}
+
+<link rel="stylesheet" type="text/css" href="~/Content/HeckFire.css">
 <header>
     HeckFire
 </header>
@@ -15,10 +21,12 @@
         <div class="getCurrentAndNext">
             @using (Html.BeginForm("Calculate", "HeckFire", FormMethod.Post))
                                  {
+           
             <button name="Function" value="GetCurrentQuest" type="submit">Current Quest</button>
             <button name="Function" value="GetNextQuest" type="submit">Next Quest</button>
             }
    
+       
         </div>
 
 
@@ -28,30 +36,54 @@
             @Html.LabelFor(model => model.Quest)
             @Html.EnumDropDownListFor(model => model.Quest)
            
+           
+
             <button name="Function" value="GetTimeWhenNext" type="submit">Get quests next start time</button>
             <button name="Function" value="GetTimeUntilNext" type="submit">Get time until quest starts</button>
             }
    
+       
         </div>
 
         <div class="getQuestAfterHours">
             @using (Html.BeginForm("Calculate", "HeckFire", FormMethod.Get))
-        {
-            @Html.LabelFor(model => model.Hours)
-            @Html.TextBoxFor(model => model.Hours)
+            {
+                @Html.LabelFor(model => model.Hours)
+                @Html.TextBoxFor(model => model.Hours)
            
-            <button name="Function" value="GetQuestAfterHours" type="submit">Get quest after hours</button>
+           
+
+                <button name="Function" value="GetQuestAfterHours" type="submit">Get quest after hours</button>
             }
    
+       
         </div>
-
+        
+        <div class="getQuestList">
+            @using (Html.BeginForm("GetQuestList", "HeckFire", FormMethod.Get))
+            {
+                @Html.LabelFor(model => model.QuestListLength)
+                @Html.TextBoxFor(model => model.QuestListLength)
+           
+           <button name="Function" value="GetQuestList" type="submit">Get quest list</button>
+            }
+   
+       
+        </div>
         </br>
-
-        <div class="result">
+    </div>
+    <div>
+        <div class="result" id="resultText">
 
             <label>Result:</label>
-            @Model.Result
+            <span style="white-space: pre-line">@Model.Result</span>
 
         </div>
+       <div class="result" id="questList">
+           <label>Quest list:</label>
+           <br/>
+           <span style="white-space: pre-line">@Model.QuestList</span>
+        </div>
+
     </div>
 </body>

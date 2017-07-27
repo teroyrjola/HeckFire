@@ -1,8 +1,11 @@
-﻿TimeWhenBtn
+﻿$('.Function').click(function()
+    {
+        var control = document.getElementsByClassName('result');
+        control.style.visibility = "visible";
+    });
 
-$("#TimeWhenBtn").click(function () {
-    $.get("/HeckFire/CurrentQuest/")
-        .done(function (obj) {
-            ("#output").value = get("/HeckFire/CurrentQuest/")
-        });
-})
+function ShowTable()
+{
+    var control = document.getElementById('result');
+    control.style.visibility = "visible";
+}
