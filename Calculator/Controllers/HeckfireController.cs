@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Web.Mvc;
 using Calculator.Models;
 using HeckFire;
@@ -14,36 +15,53 @@ namespace Calculator.Controllers
             this.calculator = new HeckFireQuestCalculator();
         }
         // GET: Result
-        public ActionResult Main()
+        public ActionResult Main(MainModel model)
         {
-            return View("Main");
-        }
-        
-        public string CurrentQuest()
-        {
-            return calculator.GetCurrentQuest().Name();
+            return View("Main", model);
         }
 
-        public ActionResult NextQuest()
+        public ActionResult Calculate(MainModel model, string function)
         {
-            return Content("CalculationResult", new CalculationResult(calculator.GetNextQuest()).ResultString);
-        }
+            string result;
+            Quest quest;
 
-        [HttpGet]
-        public ActionResult GetTimeWhenNext(MainModel model)
-        {
-            int questId = 0;
-            if (int.TryParse(model.QuestId, out questId)){
+            switch (function)
+            {
+                case "GetCurrentQuest":
+                    result = calculator.GetCurrentQuest().Name();
+                    break;
 
-                if (questId < 0 || 5 < questId) return View("Error");
+                case "GetNextQuest":
+                    result = calculator.GetNextQuest().Name();
+                    break;
 
-                Quest quest = (Quest) questId;
+                case "GetTimeWhenNext":
+                    quest = model.Quest;
+                    result = calculator.GetTimeWhenNext(quest);
+                    break;
 
+                case "GetTimeUntilNext":
+                    quest = model.Quest;
+                    result = calculator.GetTimeUntilNext(quest).PrettyTimeSpan();
+                    break;
 
-                return View("CalculationResult", new CalculationResult(calculator.GetTimeWhenNext(quest)));
+                case "GetQuestAfterHours":
+                    result = calculator.GetQuestAfterHours(Convert.ToDouble(model.Hours)).Name();
+                    break;
+
+                default:
+                    result = "Error";
+                    break;
             }
 
-            return Content(model.QuestId);
+            model.Result = result;
+
+            return View("Main", model);
+        }
+
+        public ActionResult Result()
+        {
+            return View();
         }
     }
 }

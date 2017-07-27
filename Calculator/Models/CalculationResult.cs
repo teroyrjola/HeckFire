@@ -15,5 +15,10 @@ namespace Calculator.Models
         {
             this.ResultString = s;
         }
+
+        public CalculationResult(Quest q, string s)
+        {
+            this.ResultString = q.Name() + " " + s;
+        }
     }
 }

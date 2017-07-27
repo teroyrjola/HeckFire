@@ -1,29 +1,57 @@
-﻿@model  Calculator.Models.MainModel
+﻿@using System.Web.Mvc.Html
+@using Microsoft.Ajax.Utilities
+@model  Calculator.Models.MainModel
 
 @{
     ViewBag.Title = "Main";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<header><title>HeckFire</title></header>
+<header>
+    HeckFire
+</header>
+
 <body>
+    <div>
+        <div class="getCurrentAndNext">
+            @using (Html.BeginForm("Calculate", "HeckFire", FormMethod.Post))
+                                 {
+            <button name="Function" value="GetCurrentQuest" type="submit">Current Quest</button>
+            <button name="Function" value="GetNextQuest" type="submit">Next Quest</button>
+            }
+   
+        </div>
 
-@using (Html.BeginForm("GetTimeWhenNext", "HeckFire", FormMethod.Get))
-{
-    @Html.TextBoxFor(model => model.QuestId)
-    <button id="test" type="submit">NextOne</button>
-}
 
-<script type="text/javascript" src="~/Scripts/script.js"></script>
+        <div class="getTimeWhenOrUntilNext">
+            @using (Html.BeginForm("Calculate", "HeckFire", FormMethod.Get))
+        {
+            @Html.LabelFor(model => model.Quest)
+            @Html.EnumDropDownListFor(model => model.Quest)
+           
+            <button name="Function" value="GetTimeWhenNext" type="submit">Get quests next start time</button>
+            <button name="Function" value="GetTimeUntilNext" type="submit">Get time until quest starts</button>
+            }
+   
+        </div>
 
-<input id="CurrentBtn" type="button" value="Current"/>
-<input id="NextBtn" type="button" value="Next"/>
-<button type="button" onclick="output.value = '@Html.Action("CurrentQuest", "HeckFire")'">Current quest</button>
-<button type="button" onclick="output.value = '@Html.Action("NextQuest", "HeckFire")'">Next quest</button>
+        <div class="getQuestAfterHours">
+            @using (Html.BeginForm("Calculate", "HeckFire", FormMethod.Get))
+        {
+            @Html.LabelFor(model => model.Hours)
+            @Html.TextBoxFor(model => model.Hours)
+           
+            <button name="Function" value="GetQuestAfterHours" type="submit">Get quest after hours</button>
+            }
+   
+        </div>
 
-<input id="TimeWhenBtn" type="button" value="TimeWhen"/>
-<input id="QuestId" type="text" placeholder="Quest id" name="QuestId" value="2"/>
-<br/>
+        </br>
 
-&nbsp;
-<input id="output" type="text"/>
+        <div class="result">
+
+            <label>Result:</label>
+            @Model.Result
+
+        </div>
+    </div>
 </body>
