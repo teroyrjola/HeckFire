@@ -45,7 +45,7 @@ namespace HeckFire
         /// </summary>
         internal void InitializeQuestListForHours(int hours = DefaultQuestTimePairArrayLength)
         {
-            int hoursFromKnownCycle = (int)(DateTime.Now - KnownStartOfAQuestCycle).TotalHours;
+            int hoursFromKnownCycle = (int)(DateTime.UtcNow.AddHours(3) - KnownStartOfAQuestCycle).TotalHours;
 
             int offSetInCurrentCycle = hoursFromKnownCycle % QuestCycle.Length;
 
