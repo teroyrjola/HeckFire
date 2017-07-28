@@ -25,6 +25,23 @@ namespace Calculator.Controllers
             string result;
             Quest quest;
 
+            object tempResult;
+            object tempList;
+
+            if(TempData.TryGetValue("Result", out tempResult))
+            {
+                model.Result = (string) tempResult;
+                TempData["Result"] = tempResult;
+            }
+
+            if(TempData.TryGetValue("QuestList", out tempList))
+            {
+                model.QuestList = (string) tempList;
+                TempData["QuestList"] = tempList;
+            }
+
+
+
             switch (function)
             {
                 case "GetCurrentQuest":
@@ -37,7 +54,7 @@ namespace Calculator.Controllers
 
                 case "GetTimeWhenNext":
                     quest = model.Quest;
-                    result = calculator.GetTimeWhenNext(quest);
+                    result = calculator.GetTimeWhenNext(quest).PrettyStartTime();
                     break;
 
                 case "GetTimeUntilNext":
@@ -57,7 +74,9 @@ namespace Calculator.Controllers
 
                     result = calculator.GetListOfTimesAndQuests();
 
+                    TempData["QuesTList"] = result;
                     model.QuestList = result;
+
                     return View("Main", model);
 
                 default:
@@ -65,23 +84,10 @@ namespace Calculator.Controllers
                     break;
             }
 
+            TempData["Result"] = result;
             model.Result = result;
 
             return View("Main",model);
-        }
-
-        public ActionResult GetQuestList(MainModel model, string function)
-        {
-            int listLength = Convert.ToInt32(model.QuestListLength);
-
-            if (listLength > 24)
-                calculator.InitializeQuestListForHours(listLength);
-
-            string result = calculator.GetListOfTimesAndQuests();
-                
-            model.QuestList = result;
-
-            return View("Main", model);
         }
     }
 }
