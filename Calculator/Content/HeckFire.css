@@ -10,6 +10,7 @@ body {
     background-color: rgba(0,0,0,0.05)
 }
 #main-wrap {
+    min-height: 525px;
     background-color: rgba(0,0,0,0.05)
 }
 #resultDiv {
