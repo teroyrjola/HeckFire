@@ -25,6 +25,23 @@ namespace Calculator.Controllers
             string result;
             Quest quest;
 
+            object tempResult;
+            object tempList;
+
+            if(TempData.TryGetValue("Result", out tempResult))
+            {
+                model.Result = (string) tempResult;
+                TempData["Result"] = tempResult;
+            }
+
+            if(TempData.TryGetValue("QuestList", out tempList))
+            {
+                model.QuestList = (string) tempList;
+                TempData["QuestList"] = tempList;
+            }
+
+
+
             switch (function)
             {
                 case "GetCurrentQuest":
@@ -57,7 +74,9 @@ namespace Calculator.Controllers
 
                     result = calculator.GetListOfTimesAndQuests();
 
+                    TempData["QuesTList"] = result;
                     model.QuestList = result;
+
                     return View("Main", model);
 
                 default:
@@ -65,6 +84,7 @@ namespace Calculator.Controllers
                     break;
             }
 
+            TempData["Result"] = result;
             model.Result = result;
 
             return View("Main",model);

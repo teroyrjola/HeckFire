@@ -2,6 +2,9 @@
 @using Microsoft.Ajax.Utilities
 @model  Calculator.Models.MainModel
 
+@{
+    ViewBag.Title = "Main";
+}
 
 @section Scripts
 {
@@ -53,12 +56,12 @@
             <div class="result" id="resultText">
                 <label>Result:</label>
                 <br/>
-                <span style="white-space: pre">@Model.Result</span>
+                @Model.Result
             </div>
             <div class="result" id="questList">
                 <label>Quest list:</label>
                 <br/>
-                <span style="white-space: pre">@Model.QuestList</span>
+                <span style="white-space: pre-line">@Model.QuestList</span>
             </div>
         </div>
     </div>

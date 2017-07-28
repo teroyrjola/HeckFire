@@ -1,8 +1,7 @@
-﻿body {
+﻿#main-wrap {
+    overflow: auto;
 }
-#main-wrap {
-    overflow:hidden
-}
+
 #sidebar {
     position: center;
     float: left;
@@ -10,13 +9,18 @@
     min-width: 15em;
 }
 #resultText {
-    width: 20%;
-    min-width: 10em;
+    width: 15%;
+    height: 100%;
+    display: inline-block;
+    float: left;
     }
 
 #questList {
-    width: 30%;
-    min-width: 30em;
+    position: absolute;
+    width: 50%;
+    float: right;
+    display: inline-block;
+    min-width: 50%;
 }
 
 
