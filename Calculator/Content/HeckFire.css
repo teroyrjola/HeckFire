@@ -10,12 +10,13 @@ body {
     background-color: rgba(0,0,0,0.05)
 }
 #main-wrap {
-    min-height: 525px;
-    background-color: rgba(0,0,0,0.05)
+    min-height: 50em;
+    background-color: rgba(0, 0, 0, 0.05);
+
 }
 #resultDiv {
     position: static;
-    overflow: hidden;
+    overflow: auto;
 }
 #sidebar {
     position: static;
@@ -27,6 +28,7 @@ body {
     width: 15em;
     min-height: 5em;
     float: left;
+    overflow: hidden;
     }
 
 #questList {
@@ -34,7 +36,9 @@ body {
     min-width: 17em;
     float: left;
     display: inline-block;
-    overflow: hidden;
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 
