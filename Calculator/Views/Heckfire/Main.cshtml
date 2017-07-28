@@ -13,56 +13,57 @@
 
 <link rel="stylesheet" type="text/css" href="~/Content/HeckFire.css">
 <header>
-    HeckFire
+    HeckFire Calculator
 </header>
 
 <body>
-    <div id="main-wrap">
-        <div id="sidebar">
-            <div class="control" id="getCurrentAndNext">
-                @using (Html.BeginForm("Calculate", "HeckFire", FormMethod.Post))
-                {
-                    <button name="Function" value="GetCurrentQuest" type="submit">Current Quest</button>
-                    <button name="Function" value="GetNextQuest" type="submit">Next Quest</button>
-                }
-            </div>
-            <div class="control" id="getTimeWhenOrUntilNext">
-                @using (Html.BeginForm("Calculate", "HeckFire", FormMethod.Post))
-                {
-                    @Html.LabelFor(model => model.Quest)
-                    @Html.EnumDropDownListFor(model => model.Quest)
-                    <button name="Function" value="GetTimeWhenNext" type="submit">Get quests next start time</button>
-                    <button name="Function" value="GetTimeUntilNext" type="submit">Get time until quest starts</button>
-                }
-            </div>
-            <div class="control" id="getQuestAfterHours">
-                @using (Html.BeginForm("Calculate", "HeckFire", FormMethod.Post))
-                {
-                    @Html.LabelFor(model => model.Hours)
-                    @Html.TextBoxFor(model => model.Hours, new { autocomplete = "off" })
-                    <button name="Function" value="GetQuestAfterHours" type="submit">Get quest after hours</button>
-                }
-            </div>
-            <div class="control" id="getQuestList">
-                @using (Html.BeginForm("Calculate", "HeckFire", FormMethod.Post))
-                {
-                    @Html.LabelFor(model => model.QuestListLength)
-                    @Html.TextBoxFor(model => model.QuestListLength, new { autocomplete = "off"})
-                    <button name="Function" value="GetQuestList" type="submit">Get quest list</button>
-                }
-            </div>
+<div id="main-wrap">
+    <div id="sidebar">
+        <div class="control" id="getCurrentAndNext">
+            @using (Html.BeginForm("Calculate", "HeckFire", FormMethod.Post))
+            {
+                <button name="Function" value="GetCurrentQuest" type="submit">Current</button>
+                <button name="Function" value="GetNextQuest" type="submit">Next Quest</button>
+            }
         </div>
-        <div id="resultDiv">
-            <div class="result" id="resultText">
-                <label>Result:</label>
-                <br/>
-                @Model.Result
-            </div>
-            <div class="result" id="questList">
-                <label>Quest list:</label>
-                <br/>
-                <span style="white-space: pre-line">@Model.QuestList</span>
-            </div>
+        <div class="control" id="getTimeWhenOrUntilNext">
+            @using (Html.BeginForm("Calculate", "HeckFire", FormMethod.Post))
+            {
+                @Html.LabelFor(model => model.Quest)
+                @Html.EnumDropDownListFor(model => model.Quest)
+                <button name="Function" value="GetTimeWhenNext" type="submit">Next start time</button>
+                <button name="Function" value="GetTimeUntilNext" type="submit">Time until starts</button>
+            }
+        </div>
+        <div class="control" id="getQuestAfterHours">
+            @using (Html.BeginForm("Calculate", "HeckFire", FormMethod.Post))
+            {
+                @Html.LabelFor(model => model.Hours)
+                @Html.TextBoxFor(model => model.Hours, new { autocomplete = "off" })
+                <button name="Function" value="GetQuestAfterHours" type="submit">Quest after given hours</button>
+            }
+        </div>
+        <div class="control" id="getQuestList">
+            @using (Html.BeginForm("Calculate", "HeckFire", FormMethod.Post))
+            {
+                @Html.LabelFor(model => model.QuestListLength)
+                @Html.TextBoxFor(model => model.QuestListLength, new { autocomplete = "off"})
+                <button name="Function" value="GetQuestList" type="submit">Quest list</button>
+            }
         </div>
     </div>
+    <div id="resultDiv">
+        <div class="result" id="resultText">
+            <label>Result:</label>
+            <br/>
+            @Model.Result
+        </div>
+        <div class="result" id="questList">
+            <label>Quest list:</label>
+            <br/>
+            <span style="white-space: pre-line">@Model.QuestList</span>
+        </div>
+    </div>
+</div>
 </body>
+@Scripts.Render("~/Scripts/script.js")

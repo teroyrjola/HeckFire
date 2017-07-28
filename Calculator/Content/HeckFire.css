@@ -1,32 +1,38 @@
-﻿#main-wrap {
-    overflow: auto;
+﻿header {
+    height: 1.5em;
+    overflow: hidden;
+    text-align: justify;
+    font-family: fantasy;
+    font-size: 240%;
 }
-
+#resultDiv {
+    position: static;
+    overflow: hidden;
+}
 #sidebar {
-    position: center;
+    position: static;
     float: left;
-    width: 30%;
+    width: 20%;
     min-width: 9.4em;
 }
 #resultText {
-    width: 15%;
-    height: 100%;
-    display: inline-block;
+    width: 15em;
+    min-height: 5em;
     float: left;
     }
 
 #questList {
-    position: absolute;
     width: 50%;
-    float: right;
+    min-width: 17em;
+    float: left;
     display: inline-block;
-    min-width: 50%;
+    overflow: hidden;
 }
 
 
 .control {
-    margin: 5% 0;
-    width: 75%;
+    margin: 0.5em 0;
+    width: 90%;
     max-height: 50%
 }
 
