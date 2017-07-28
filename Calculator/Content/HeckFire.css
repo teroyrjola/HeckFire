@@ -1,9 +1,16 @@
 ﻿header {
     height: 1.5em;
-    overflow: hidden;
+    min-width: 10em;
     text-align: justify;
     font-family: fantasy;
     font-size: 240%;
+}
+
+body {
+    background-color: rgba(0,0,0,0.05)
+}
+#main-wrap {
+    background-color: rgba(0,0,0,0.05)
 }
 #resultDiv {
     position: static;
