@@ -4,21 +4,21 @@
     overflow:hidden
 }
 #sidebar {
+    position: center;
     float: left;
-    width: 30%
-}
-.result {
-    display: inline-block;
     width: 30%;
+    min-width: 15em;
+}
+#resultText {
+    width: 20%;
+    min-width: 10em;
     }
 
 #questList {
-    float: right
+    width: 30%;
+    min-width: 30em;
 }
 
-#sidebar {
-    position: center;
-}
 
 .control {
     margin: 5% 0;

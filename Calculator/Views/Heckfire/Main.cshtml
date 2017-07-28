@@ -2,9 +2,7 @@
 @using Microsoft.Ajax.Utilities
 @model  Calculator.Models.MainModel
 
-@{
-    ViewBag.Title = "Main";
-}
+
 @section Scripts
 {
     <script src="@Url.Content("~/Scripts/script.js")"></script>
@@ -38,7 +36,7 @@
                 @using (Html.BeginForm("Calculate", "HeckFire", FormMethod.Post))
                 {
                     @Html.LabelFor(model => model.Hours)
-                    @Html.TextBoxFor(model => model.Hours)
+                    @Html.TextBoxFor(model => model.Hours, new { autocomplete = "off" })
                     <button name="Function" value="GetQuestAfterHours" type="submit">Get quest after hours</button>
                 }
             </div>
@@ -46,7 +44,7 @@
                 @using (Html.BeginForm("Calculate", "HeckFire", FormMethod.Post))
                 {
                     @Html.LabelFor(model => model.QuestListLength)
-                    @Html.TextBoxFor(model => model.QuestListLength)
+                    @Html.TextBoxFor(model => model.QuestListLength, new { autocomplete = "off"})
                     <button name="Function" value="GetQuestList" type="submit">Get quest list</button>
                 }
             </div>
@@ -55,12 +53,12 @@
             <div class="result" id="resultText">
                 <label>Result:</label>
                 <br/>
-                <span style="white-space: pre-line">@Model.Result</span>
+                <span style="white-space: pre">@Model.Result</span>
             </div>
             <div class="result" id="questList">
                 <label>Quest list:</label>
                 <br/>
-                <span style="white-space: pre-line">@Model.QuestList</span>
+                <span style="white-space: pre">@Model.QuestList</span>
             </div>
         </div>
     </div>
