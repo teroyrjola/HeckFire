@@ -54,7 +54,7 @@ namespace Calculator.Controllers
 
                 case "GetTimeWhenNext":
                     quest = model.Quest;
-                    result = calculator.GetTimeWhenNext(quest);
+                    result = calculator.GetTimeWhenNext(quest).PrettyStartTime();
                     break;
 
                 case "GetTimeUntilNext":
