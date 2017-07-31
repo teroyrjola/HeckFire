@@ -7,11 +7,21 @@
 }
 
 body {
-    background-color: rgba(0,0,0,0.05)
+    background-color: rgba(0, 0, 0, 0.05);
 }
 #main-wrap {
     min-height: 525px;
     background-color: rgba(0, 0, 0, 0.1);
+    -moz-border-radius:5px;
+    -webkit-border-radius:13px;
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.9, #768d87), color-stop(0.001, #A5CC82));
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    moz-box-shadow: 1px 2px 3px rgba(0,0,0,.5);
+    -webkit-box-shadow: 1px 2px 3px rgba(0,0,0,.5);
+    box-shadow: 1px 2px 3px rgba(0,0,0,.5);
+
 
 }
 #resultDiv {
@@ -127,4 +137,7 @@ input {
     width: 100%;
     -moz-border-radius:5px;
     -webkit-border-radius:5px;
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.01, rgb(225, 238, 195)), color-stop(0.3, rgb(148, 164, 164)));
+    box-shadow:inset 0px 1px 3px 0px #91b8b3;
+
 }
