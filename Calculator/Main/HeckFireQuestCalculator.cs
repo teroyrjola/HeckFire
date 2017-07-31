@@ -126,5 +126,10 @@ namespace HeckFire
 
             return HoursWithQuests[(int) hrs].Quest;
         }
+
+        public static string StaticGetListOfTimesAndQuests()
+        {
+            return new HeckFireQuestCalculator().GetListOfTimesAndQuests();
+        }
     }
 }

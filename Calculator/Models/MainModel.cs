@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using HeckFire;
+using Microsoft.Ajax.Utilities;
 
 namespace Calculator.Models
 {
@@ -11,7 +13,18 @@ namespace Calculator.Models
         public string Hours { get; set; }
         [Display(Name = "Enter length of a quest list: ")]
         public string QuestListLength { get; set; }
-        public string QuestList { get; set; }
+
+        private string questList;
+
+        public string QuestList
+        {
+            get
+            {
+                if (questList.IsNullOrWhiteSpace()) return HeckFireQuestCalculator.StaticGetListOfTimesAndQuests();
+                return questList;
+            }
+            set { questList = value; }
+        }
 
         public string Result { get; set; }
     }

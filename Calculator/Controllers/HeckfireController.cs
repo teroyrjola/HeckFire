@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Web.Mvc;
 using Calculator.Models;
 using HeckFire;
@@ -9,38 +8,23 @@ namespace Calculator.Controllers
     public class HeckFireController : Controller
     {
         private readonly HeckFireQuestCalculator calculator;
+        private static readonly MainModel mainModel = new MainModel();
 
         public HeckFireController()
         {
             this.calculator = new HeckFireQuestCalculator();
         }
-        // GET: Result
+
         public ActionResult Main(MainModel model)
         {
             return View(model);
         }
 
+        [HttpPost]
         public ActionResult Calculate(MainModel model, string function)
         {
             string result;
             Quest quest;
-
-            object tempResult;
-            object tempList;
-
-            if(TempData.TryGetValue("Result", out tempResult))
-            {
-                model.Result = (string) tempResult;
-                TempData["Result"] = tempResult;
-            }
-
-            if(TempData.TryGetValue("QuestList", out tempList))
-            {
-                model.QuestList = (string) tempList;
-                TempData["QuestList"] = tempList;
-            }
-
-
 
             switch (function)
             {
@@ -74,20 +58,16 @@ namespace Calculator.Controllers
 
                     result = calculator.GetListOfTimesAndQuests();
 
-                    TempData["QuesTList"] = result;
-                    model.QuestList = result;
-
-                    return View("Main", model);
+                    mainModel.QuestList = result;
+                    return View("Main", mainModel);
 
                 default:
                     result = "Error";
                     break;
             }
 
-            TempData["Result"] = result;
-            model.Result = result;
-
-            return View("Main",model);
+            mainModel.Result = result;
+            return View("Main", mainModel);
         }
     }
 }

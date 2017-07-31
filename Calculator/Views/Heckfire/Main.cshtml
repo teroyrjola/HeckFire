@@ -1,17 +1,13 @@
 ﻿@using System.Web.Mvc.Html
-@using Microsoft.Ajax.Utilities
+@using System.Xml.Schema
 @model  Calculator.Models.MainModel
 
 @{
     ViewBag.Title = "Main";
 }
 
-@section Scripts
-{
-    <script src="@Url.Content("~/Scripts/script.js")"></script>
-}
-
 <link rel="stylesheet" type="text/css" href="~/Content/HeckFire.css">
+<html>
 <header>
     HeckFire Calculator
 </header>
@@ -25,6 +21,7 @@
                 <button name="Function" value="GetCurrentQuest" type="submit">Current</button>
                 <button name="Function" value="GetNextQuest" type="submit">Next Quest</button>
             }
+
         </div>
         <div class="control" id="getTimeWhenOrUntilNext">
             @using (Html.BeginForm("Calculate", "HeckFire", FormMethod.Post))
@@ -56,14 +53,18 @@
         <div class="result" id="resultText">
             <label>Result:</label>
             <br/>
-            @Model.Result
+            <p>@Model.Result</p>
         </div>
         <div class="result" id="questList">
             <label>Quest list:</label>
             <br/>
-            <span style="white-space: pre-line">@Model.QuestList</span>
+            <span style="white-space: pre-line"><p id="list">@Model.QuestList</p></span>
         </div>
     </div>
 </div>
+@Scripts.Render("~/bundles/jquery")
+<script type="text/javascript">
+    document.getElementById("list").innerHTML = Model.Quest;
+</script> 
 </body>
-@Scripts.Render("~/Scripts/script.js")
+</html>
