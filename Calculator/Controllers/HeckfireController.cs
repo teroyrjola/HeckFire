@@ -21,7 +21,7 @@ namespace Calculator.Controllers
         }
 
         [HttpPost]
-        public ActionResult Calculate(MainModel model, string function)
+        public string Calculate(MainModel model, string function)
         {
             string result;
             Quest quest;
@@ -57,18 +57,16 @@ namespace Calculator.Controllers
                     if (listLength > 24)
                         calculator.InitializeQuestListForHours(listLength);
 
-                    result = calculator.GetListOfTimesAndQuests();
+                    result = calculator.GetListOfTimesAndQuests().Replace("\n", "<br/>");
 
-                    mainModel.QuestList = result;
-                    return View("Main", mainModel);
+                    return result;
 
                 default:
                     result = "Error";
                     break;
             }
 
-            mainModel.Result = result;
-            return View("Main", mainModel);
+            return result;
         }
     }
 }
