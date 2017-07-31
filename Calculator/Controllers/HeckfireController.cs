@@ -47,11 +47,12 @@ namespace Calculator.Controllers
                     break;
 
                 case "GetQuestAfterHours":
-                    result = calculator.GetQuestAfterHours(Convert.ToDouble(model.Hours)).Name();
+                    result = calculator.GetQuestAfterHours(model.Hours).Name();
                     break;
 
                 case "GetQuestList":
-                    int listLength = Convert.ToInt32(model.QuestListLength);
+                    int listLength = 0;
+                    int.TryParse(model.QuestListLength, out listLength);
 
                     if (listLength > 24)
                         calculator.InitializeQuestListForHours(listLength);

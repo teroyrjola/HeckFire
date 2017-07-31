@@ -116,15 +116,26 @@ namespace HeckFire
             return diff;
         }
 
-        internal Quest GetQuestAfterHours(double hrs)
+        internal Quest GetQuestAfterHours(string input)
         {
+            double hrs = 0;
+            try
+            {
+                hrs = Convert.ToDouble(input);
+            }
+            catch (FormatException)
+            {
+                Double.TryParse(input.Replace(" ", string.Empty).Replace('.', ','), out hrs);
+            }
             if (HoursWithQuests.IsInvalid())
                 InitializeQuestListForHours();
 
             if (HoursWithQuests.Length <= hrs)
                 InitializeQuestListForHours((int)Math.Ceiling(hrs));
 
-            return HoursWithQuests[(int) hrs].Quest;
+            int index = (int)(hrs + DateTime.Now.TimeOfDay.Minutes / 60.0);
+
+            return HoursWithQuests[index].Quest;
         }
 
         public static string StaticGetListOfTimesAndQuests()
