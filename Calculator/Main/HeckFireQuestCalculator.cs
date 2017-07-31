@@ -109,7 +109,11 @@ namespace HeckFire
             TimeSpan currentTime = DateTime.Now.TimeOfDay;
             TimeSpan questStartTime = TimeSpan.Parse(GetTimeWhenNext(quest) + ":05");
 
-            return questStartTime.Subtract(currentTime);
+            TimeSpan diff = questStartTime.Subtract(currentTime);
+
+            if (diff.Seconds < 0) diff += TimeSpan.FromDays(1);
+
+            return diff;
         }
 
         internal Quest GetQuestAfterHours(double hrs)
