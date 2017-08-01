@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HeckFire
 {
@@ -33,6 +35,25 @@ namespace HeckFire
         {
             return questTimeArray == null || questTimeArray.Length < 12 ||
                    questTimeArray[0].Time != DateTime.UtcNow.AddHours(3).Hour.ToString("00");
+        }
+
+        public static string RemoveQuestsFromQuestList(string questListString, string[] questsToFilter)
+        {
+            List<string> questListList = questListString.Split(new[] { Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries).ToList();
+
+            for (int i = questListList.Count - 1; i >= 0; i--)
+            {
+                foreach (string quest in questsToFilter)
+                {
+                    if (questListList[i].Contains(quest))
+                    {
+                        questListList.RemoveAt(i);
+                        break;
+                    }
+                }
+            }
+
+            return String.Join("\n", questListList);
         }
     }
 }

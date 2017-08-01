@@ -68,5 +68,14 @@ namespace Calculator.Controllers
 
             return result;
         }
+
+        [HttpPost]
+        public string Filter(MainModel model, string questToFilter)
+        {
+            if (true)
+                return Helpers.RemoveQuestsFromQuestList(model.QuestList, new string[] {questToFilter});
+
+            else return model.QuestList;
+        }
     }
 }

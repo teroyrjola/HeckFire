@@ -27,5 +27,7 @@ namespace Calculator.Models
         }
 
         public string Result { get; set; }
+        [Display(Name = "Filters:")]
+        public QuestFilters QuestFilters { get; set; }
     }
 }
