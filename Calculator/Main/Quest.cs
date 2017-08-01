@@ -1,4 +1,6 @@
-﻿namespace HeckFire
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace HeckFire
 {
 
     public static class QuestInfo
@@ -22,9 +24,13 @@
 public enum Quest
 {
     Construction,
+    [Display(Name = "Troop training")]
     TroopTraining,
+    [Display(Name = "Monster slaying")]
     MonsterSlaying,
+    [Display(Name = "Resource gathering")]
     ResourceGathering,
     Researching,
-    MightGrowth,
+    [Display(Name = "Might growth")]
+    MightGrowth
 }

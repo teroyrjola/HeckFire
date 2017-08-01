@@ -8,8 +8,10 @@
 
 body {
     background-color: rgba(0, 0, 0, 0.05);
+    overflow: auto;
 }
 #main-wrap {
+    overflow: auto;
     min-height: 525px;
     background-color: rgba(0, 0, 0, 0.1);
     -moz-border-radius:5px;
@@ -27,6 +29,7 @@ body {
 #resultDiv {
     position: static;
     overflow: auto;
+    padding-left: 1em;
 }
 #sidebar {
     position: static;
@@ -54,8 +57,8 @@ body {
 
 .control {
     margin: 0.5em 0;
-    width: 90%;
-    max-height: 50%
+    width: 98%;
+    max-height: 50%;
 }
 
 button{
@@ -110,17 +113,15 @@ select {
     -webkit-border-radius:5px;
     border-radius:5px;
     border:1px solid #566963;
-    display:inline-block;
     cursor:pointer;
     color:#ffffff;
     font-family:Arial;
-    font-size:15px;
+    font-size: 11.1px;
     font-weight:bold;
-    padding:5px 2px;
+    padding:5px 0px;
     text-decoration:none;
     text-shadow:0px -1px 0px #2b665e;
-    text-align-last: right;
-    padding-right: 20%;
+    text-align-last: center;
 }
 
 select:hover {
