@@ -106,7 +106,7 @@ namespace HeckFire
             if (HoursWithQuests.IsInvalid())
                 InitializeQuestListForHours();
 
-            TimeSpan currentTime = DateTime.Now.TimeOfDay;
+            TimeSpan currentTime = DateTime.UtcNow.AddHours(3).TimeOfDay;
             TimeSpan questStartTime = TimeSpan.Parse(GetTimeWhenNext(quest) + ":05");
 
             TimeSpan diff = questStartTime.Subtract(currentTime);
@@ -133,7 +133,7 @@ namespace HeckFire
             if (HoursWithQuests.Length <= hrs)
                 InitializeQuestListForHours((int)Math.Ceiling(hrs));
 
-            int index = (int)(hrs + DateTime.Now.TimeOfDay.Minutes / 60.0);
+            int index = (int)(hrs + DateTime.UtcNow.AddHours(3).TimeOfDay.Minutes / 60.0);
 
             return HoursWithQuests[index].Quest;
         }

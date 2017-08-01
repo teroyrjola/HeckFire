@@ -32,7 +32,7 @@ namespace HeckFire
         public static bool IsInvalid(this QuestTimePair[] questTimeArray)
         {
             return questTimeArray == null || questTimeArray.Length < 12 ||
-                   questTimeArray[0].Time != DateTime.Now.Hour.ToString("00");
+                   questTimeArray[0].Time != DateTime.UtcNow.AddHours(3).Hour.ToString("00");
         }
     }
 }
