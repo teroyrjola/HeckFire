@@ -1,6 +1,4 @@
-﻿@using System.Data.Entity.Core.Objects
-@using System.Web.Mvc.Html
-@using System.Xml.Schema
+﻿@using System.Web.Mvc.Html
 @model  Calculator.Models.MainModel
 
 @{
@@ -8,71 +6,100 @@
 }
 
 <link rel="stylesheet" type="text/css" href="~/Content/HeckFire.css">
-<html>
 <header>
     HeckFire Calculator
 </header>
-
+<html>
 <body>
-<div id="main-wrap">
-    <div id="sidebar">
-        @{
-            AjaxOptions options = new AjaxOptions();
-            options.HttpMethod = "POST";
-            options.UpdateTargetId = "textResult";
-            options.InsertionMode = InsertionMode.Replace;
-        }
-        <div class="control" id="getCurrentAndNext">
-            @using (Ajax.BeginForm("Calculate", "HeckFire", options))
-            {
-                <button name="Function" type="submit" value="GetCurrentQuest">Current</button>
-                <button name="Function" type="submit" value="GetNextQuest">Next</button>
+    <div id="main-wrap">
+        <div id="sidebar">
+            @{
+                AjaxOptions options = new AjaxOptions();
+                options.HttpMethod = "POST";
+                options.UpdateTargetId = "textResult";
+                options.InsertionMode = InsertionMode.Replace;
             }
+            <div class="control" id="getCurrentAndNext">
+                @using (Ajax.BeginForm("Calculate", "HeckFire", options))
+            {
+                    <button name="Function" type="submit" value="GetCurrentQuest">Current</button>
+                    <button name="Function" type="submit" value="GetNextQuest">Next</button>
+                }
 
-        </div>
-        <div class="control" id="getTimeWhenOrUntilNext">
-            @using (Ajax.BeginForm("Calculate", "HeckFire", options))
+            </div>
+            <div class="control" id="getTimeWhenOrUntilNext">
+                @using (Ajax.BeginForm("Calculate", "HeckFire", options))
             {
-                @Html.LabelFor(model => model.Quest)
-                @Html.EnumDropDownListFor(model => model.Quest)
-                <button name="Function" value="GetTimeWhenNext" type="submit">Next start time</button>
-                <button name="Function" value="GetTimeUntilNext" type="submit">Time until starts</button>
-            }
-        </div>
-        <div class="control" id="getQuestAfterHours">
-            @using (Ajax.BeginForm("Calculate", "HeckFire", options))
+                    @Html.LabelFor(model => model.Quest)
+                    @Html.EnumDropDownListFor(model => model.Quest, new { id ="dropDown"})
+                    <button name="Function" value="GetTimeWhenNext" type="submit">Next start time</button>
+                    <button name="Function" value="GetTimeUntilNext" type="submit">Time until starts</button>
+                }
+            </div>
+            <div class="control" id="getQuestAfterHours">
+                @using (Ajax.BeginForm("Calculate", "HeckFire", options))
             {
-                @Html.LabelFor(model => model.Hours)
-                @Html.TextBoxFor(model => model.Hours, new {autocomplete = "off"})
-                <button name="Function" value="GetQuestAfterHours" type="submit">Quest after given hours</button>
-            }
+                    @Html.LabelFor(model => model.Hours)
+                    @Html.TextBoxFor(model => model.Hours, new { autocomplete = "off" })
+                    <button name="Function" value="GetQuestAfterHours" type="submit">Quest after hours</button>
+                }
+            </div>
+            <div class="control" id="getQuestList">
+                @using (Ajax.BeginForm("Calculate", "HeckFire", new AjaxOptions
+            {
+                HttpMethod = "POST",
+                UpdateTargetId = "list",
+                InsertionMode = InsertionMode.Replace
+            }))
+            {
+                    @Html.LabelFor(model => model.QuestListLength)
+                    @Html.TextBoxFor(model => model.QuestListLength, new { autocomplete = "off" })
+                    <button name="Function" value="GetQuestList" type="submit">Quest list</button>
+                }
+            </div>
         </div>
-        <div class="control" id="getQuestList">
-           @using (Ajax.BeginForm("Calculate", "HeckFire", new AjaxOptions
-           {
-               HttpMethod = "POST",
-               UpdateTargetId = "list",
-               InsertionMode = InsertionMode.Replace
-           }))
-           { 
-                @Html.LabelFor(model => model.QuestListLength)
-                @Html.TextBoxFor(model => model.QuestListLength, new {autocomplete = "off"})
-                <button name="Function" value="GetQuestList" type="submit">Quest list</button>
-            }
+        <div id="resultDiv">
+            <div class="result" id="resultText">
+                <label>Result:</label>
+                <br />
+                <p id="textResult">@Model.Result</p>
+            </div>
+            <div class="result" id="questList">
+                <label>Quest list:</label>
+                <br />
+                <span style="white-space: pre-line">
+                    <p id="list">@Model.QuestList</p>
+                </span>
+            </div>
         </div>
     </div>
-    <div id="resultDiv">
-        <div class="result" id="resultText">
-            <label>Result:</label>
-            <br/>
-            <p id="textResult">@Model.Result</p>
-        </div>
-        <div class="result" id="questList">
-            <label>Quest list:</label>
-            <br/>
-            <span style="white-space: pre-line"><p id="list">@Model.QuestList</p></span>
-        </div>
-    </div>
-</div>
 </body>
+
 </html>
+@section scripts{
+    <script type="text/javascript">
+        var smallSize;
+
+        if ($('#sidebar').width() < 180) {
+            $("select").css("font-size", "11.1px");
+            smallSize = 1;
+        } else {
+            $("select").css("font-size", "15px");
+            smallSize = 0;
+        }
+
+        $(window).resize(function() {
+            if ($('#sidebar').width() < 180) {
+                if (!smallSize) {
+                    $("select").css("font-size", "11.1px");
+                    smallSize = 1;
+                }
+            } else {
+                if (smallSize) {
+                    $("select").css("font-size", "15px");
+                    smallSize = 0;
+                }
+            }
+        });
+    </script>
+}
