@@ -39,7 +39,7 @@ namespace HeckFire
 
         public static string RemoveQuestsFromQuestList(string questListString, string[] questsToFilter)
         {
-            List<string> questListList = questListString.Split(new[] { Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries).ToList();
+            List<string> questListList = questListString.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None).ToList();
 
             for (int i = questListList.Count - 1; i >= 0; i--)
             {

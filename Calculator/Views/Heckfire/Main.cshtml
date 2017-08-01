@@ -60,23 +60,23 @@
                 @using (Ajax.BeginForm("Filter", "HeckFire", questListAjaxOptions))
                 {
                     @Html.LabelFor(model => model.QuestFilters)
-                    <input name="Function" class="imageCheckBox" title="Construction" 
-                           value="Construction" type="image" src="~/Content/QuestIcons/Construction.png" />
+                    <button name="filterButton" class="imageCheckBox" title="Construction" 
+                            value="Construction" type="submit"><img src="~/Content/QuestIcons/Construction.png" alt="Construction"></button>
 
-                    <input name="Function" class="imageCheckBox" title="Troop training" 
-                           value="TroopTraining" type="image" src="~/Content/QuestIcons/TroopTraining.png"/>
+                    <button name="filterButton" class="imageCheckBox" title="Troop training" 
+                            value="Troop training" type="submit"><img src="~/Content/QuestIcons/TroopTraining.png"alt="Construction"></button>
 
-                    <input name="Function" class="imageCheckBox" title="Monster slaying" 
-                           value="MonsterSlaying" type="image" src="~/Content/QuestIcons/MonsterSlaying.png" />
+                    <button name="filterButton" class="imageCheckBox" title="Monster slaying" 
+                            value="Monster slaying" type="submit"><img src="~/Content/QuestIcons/MonsterSlaying.png" alt="Construction"></button>
 
-                    <input name="Function" class="imageCheckBox" title="Resource gathering" 
-                           value="ResourceGathering" type="image" src="~/Content/QuestIcons/ResourceGathering.png" />
+                    <button name="filterButton" class="imageCheckBox" title="Resource gathering" 
+                            value="Resource gathering" type="submit"><img src="~/Content/QuestIcons/ResourceGathering.png" alt="Construction"></button>
 
-                    <input name="Function" class="imageCheckBox" title="Researching" 
-                           value="Researching" type="image" src="~/Content/QuestIcons/Researching.png" />
+                    <button name="filterButton" class="imageCheckBox" title="Researching" 
+                            value="Researching" type="submit"><img src="~/Content/QuestIcons/Researching.png" alt="Construction"></button>
 
-                    <input name="Function" class="imageCheckBox" title="Might growth" 
-                           value="MightGrowth" type="image" src="~/Content/QuestIcons/MightGrowth.png" />
+                    <button name="filterButton" class="imageCheckBox" title="Might growth" 
+                            value="Might growth" type="submit"><img src="~/Content/QuestIcons/MightGrowth.png" alt="Construction"></button>
                 }
             </div>
         </div>

@@ -10,5 +10,15 @@ namespace Calculator.Models
         public bool ResourceGathering;
         public bool Researching;
         public bool MightGrowth;
+
+        public QuestFilters()
+        {
+            this.Construction = true;
+            this.TroopTraining = true;
+            this.MonsterSlaying = true;
+            this.ResourceGathering = true;
+            this.Researching = true;
+            this.MightGrowth = true;
+        }
     }
 }

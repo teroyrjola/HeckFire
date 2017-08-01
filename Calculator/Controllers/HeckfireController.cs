@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Calculator.Models;
 using HeckFire;
+using Microsoft.Ajax.Utilities;
 
 namespace Calculator.Controllers
 {
@@ -70,11 +71,14 @@ namespace Calculator.Controllers
         }
 
         [HttpPost]
-        public string Filter(MainModel model, string questToFilter)
+        public string Filter(MainModel model, string filterButton)
         {
-            if (true)
-                return Helpers.RemoveQuestsFromQuestList(model.QuestList, new string[] {questToFilter});
-
+            model.QuestList = TempData["QuestList"]?.ToString() ?? model.QuestList;
+            if (!filterButton.IsNullOrWhiteSpace()) {
+                string s = Helpers.RemoveQuestsFromQuestList(model.QuestList, new string[] { filterButton });
+                TempData["QuestList"] = s;
+                return s;
+            }
             else return model.QuestList;
         }
     }
