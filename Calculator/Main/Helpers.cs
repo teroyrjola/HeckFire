@@ -86,5 +86,11 @@ namespace HeckFire
 
             return filters;
         }
+
+        public static string AddDate(string hoursWithQuests)
+        {
+            hoursWithQuests =  hoursWithQuests.Replace("00:05 - 01:00:", "-------------------------------------\n00:05 - 01:00:");
+            return hoursWithQuests;
+        }
     }
 }

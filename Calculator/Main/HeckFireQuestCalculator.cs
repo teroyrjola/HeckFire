@@ -74,6 +74,8 @@ namespace HeckFire
                 (time, quest) => $"{time.PrettyQuestDuration()}: {quest.Name()}");
 
             string result = string.Join("\n", timesAndQuests);
+            result = Helpers.AddDate(result);
+
             return result;
         }
 
