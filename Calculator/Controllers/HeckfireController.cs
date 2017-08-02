@@ -73,13 +73,17 @@ namespace Calculator.Controllers
         [HttpPost]
         public string Filter(MainModel model, string filterButton)
         {
-            model.QuestList = TempData["QuestList"]?.ToString() ?? model.QuestList;
             if (!filterButton.IsNullOrWhiteSpace()) {
-                string s = Helpers.RemoveQuestsFromQuestList(model.QuestList, new string[] { filterButton });
-                TempData["QuestList"] = s;
+                QuestFilters filters = (QuestFilters)TempData["QuestFilters"] ?? new QuestFilters();
+
+                filters = Helpers.ChangeBoolean(filters, filterButton);
+
+                TempData["QuestFilters"] = filters;
+
+                string s = Helpers.RemoveQuestsFromQuestList(model.QuestList, filters);
                 return s;
             }
-            else return model.QuestList;
+            else return TempData["QuestList"]?.ToString();
         }
     }
 }

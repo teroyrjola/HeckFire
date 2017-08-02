@@ -60,23 +60,23 @@
                 @using (Ajax.BeginForm("Filter", "HeckFire", questListAjaxOptions))
                 {
                     @Html.LabelFor(model => model.QuestFilters)
-                    <button name="filterButton" class="imageCheckBox" title="Construction" 
-                            value="Construction" type="submit"><img src="~/Content/QuestIcons/Construction.png" alt="Construction"></button>
+                    <button name="filterButton" class="imageButton" title="Construction" id="Construction"
+                            value="Construction" type="submit" ></button>
 
-                    <button name="filterButton" class="imageCheckBox" title="Troop training" 
-                            value="Troop training" type="submit"><img src="~/Content/QuestIcons/TroopTraining.png"alt="Construction"></button>
+                    <button name="filterButton" class="imageButton" title="Troop training" id="TroopTraining"
+                            value="Troop training" type="submit" > </button>
 
-                    <button name="filterButton" class="imageCheckBox" title="Monster slaying" 
-                            value="Monster slaying" type="submit"><img src="~/Content/QuestIcons/MonsterSlaying.png" alt="Construction"></button>
+                    <button name="filterButton" class="imageButton" title="Monster slaying" id="MonsterSlaying"
+                            value="Monster slaying" type="submit" ></button>
 
-                    <button name="filterButton" class="imageCheckBox" title="Resource gathering" 
-                            value="Resource gathering" type="submit"><img src="~/Content/QuestIcons/ResourceGathering.png" alt="Construction"></button>
+                    <button name="filterButton" class="imageButton" title="Resource gathering" id="ResourceGathering"
+                            value="Resource gathering" type="submit" ></button>
 
-                    <button name="filterButton" class="imageCheckBox" title="Researching" 
-                            value="Researching" type="submit"><img src="~/Content/QuestIcons/Researching.png" alt="Construction"></button>
+                    <button name="filterButton" class="imageButton" title="Researching" id="Researching"
+                            value="Researching" type="submit" ></button>
 
-                    <button name="filterButton" class="imageCheckBox" title="Might growth" 
-                            value="Might growth" type="submit"><img src="~/Content/QuestIcons/MightGrowth.png" alt="Construction"></button>
+                    <button name="filterButton" class="imageButton" title="Might growth" id="MightGrowth"
+                            value="Might growth" type="submit" ></button>
                 }
             </div>
         </div>
@@ -123,5 +123,27 @@
                 }
             }
         });
+
+        var imageButtons = document.getElementsByClassName("imageButton");
+
+        for (var i = 0; i < imageButtons.length; i++) {
+            imageButtons[i].style.backgroundImage = "url('../../Content/QuestIcons/" + imageButtons[i].id + ".png')";
+        }
+
+        for(i = 0; i < imageButtons.length; i++) {
+
+            imageButtons[i].addEventListener("click",
+                function (event) {
+                    var button = event.target;
+
+                    if (button.getAttribute("aria-checked") === "true") {
+                        button.style.backgroundColor = "";
+                        button.setAttribute("aria-checked", false);
+                    } else {
+                        button.style.backgroundColor = "rgba(0,0,0,0.6";
+                        button.setAttribute("aria-checked", true);
+                    }
+                });
+        }
     </script>
 }
