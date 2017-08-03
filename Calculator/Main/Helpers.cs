@@ -41,7 +41,7 @@ namespace HeckFire
 
         public static string RemoveQuestsFromQuestList(string questListString, QuestFilters filters)
         {
-            List<string> questListList = questListString.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None).ToList();
+            List<string> questListList = questListString.Split(new string[] { "\r\n", "\n", "<br/>" }, StringSplitOptions.None).ToList();
 
             string[] questsToBeFiltered = QuestFilters.ReturnFalseProperties(filters);
 
@@ -62,27 +62,75 @@ namespace HeckFire
 
         public static QuestFilters ChangeBoolean(QuestFilters filters, string questName)
         {
-            switch (questName)
-            {
-                case "Construction":
-                    filters.Construction = !filters.Construction;
-                    break;
-                case "Troop training":
-                    filters.TroopTraining = !filters.TroopTraining;
-                    break;
-                case "Monster slaying":
-                    filters.MonsterSlaying = !filters.MonsterSlaying;
-                    break;
-                case "Resource gathering":
-                    filters.ResourceGathering = !filters.ResourceGathering;
-                    break;
-                case "Researching":
-                    filters.Researching = !filters.Researching;
-                    break;
-                case "Might growth":
-                    filters.MightGrowth = !filters.MightGrowth;
-                    break;
-            }
+            if (filters.Construction && filters.MightGrowth && filters.MonsterSlaying &&
+                filters.Researching && filters.ResourceGathering && filters.TroopTraining)
+                switch (questName)
+                {
+                    case "Construction":
+                        filters.TroopTraining = !filters.TroopTraining;
+                        filters.MonsterSlaying = !filters.MonsterSlaying;
+                        filters.ResourceGathering = !filters.ResourceGathering;
+                        filters.Researching = !filters.Researching;
+                        filters.MightGrowth = !filters.MightGrowth;
+                        break;
+                    case "Troop training":
+                        filters.Construction = !filters.Construction;
+                        filters.MonsterSlaying = !filters.MonsterSlaying;
+                        filters.ResourceGathering = !filters.ResourceGathering;
+                        filters.Researching = !filters.Researching;
+                        filters.MightGrowth = !filters.MightGrowth;
+                        break;
+                    case "Monster slaying":
+                        filters.Construction = !filters.Construction;
+                        filters.TroopTraining = !filters.TroopTraining;
+                        filters.ResourceGathering = !filters.ResourceGathering;
+                        filters.Researching = !filters.Researching;
+                        filters.MightGrowth = !filters.MightGrowth;
+                        break;
+                    case "Resource gathering":
+                        filters.Construction = !filters.Construction;
+                        filters.TroopTraining = !filters.TroopTraining;
+                        filters.MonsterSlaying = !filters.MonsterSlaying;
+                        filters.Researching = !filters.Researching;
+                        filters.MightGrowth = !filters.MightGrowth;
+                        break;
+                    case "Researching":
+                        filters.Construction = !filters.Construction;
+                        filters.TroopTraining = !filters.TroopTraining;
+                        filters.MonsterSlaying = !filters.MonsterSlaying;
+                        filters.ResourceGathering = !filters.ResourceGathering;
+                        filters.MightGrowth = !filters.MightGrowth;
+                        break;
+                    case "Might growth":
+                        filters.Construction = !filters.Construction;
+                        filters.TroopTraining = !filters.TroopTraining;
+                        filters.MonsterSlaying = !filters.MonsterSlaying;
+                        filters.ResourceGathering = !filters.ResourceGathering;
+                        break;
+                }
+
+            else
+                switch (questName)
+                {
+                    case "Construction":
+                        filters.Construction = !filters.Construction;
+                        break;
+                    case "Troop training":
+                        filters.TroopTraining = !filters.TroopTraining;
+                        break;
+                    case "Monster slaying":
+                        filters.MonsterSlaying = !filters.MonsterSlaying;
+                        break;
+                    case "Resource gathering":
+                        filters.ResourceGathering = !filters.ResourceGathering;
+                        break;
+                    case "Researching":
+                        filters.Researching = !filters.Researching;
+                        break;
+                    case "Might growth":
+                        filters.MightGrowth = !filters.MightGrowth;
+                        break;
+                }
 
             return filters;
         }
