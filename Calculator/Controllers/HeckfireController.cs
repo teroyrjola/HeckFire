@@ -59,7 +59,7 @@ namespace Calculator.Controllers
                         calculator.InitializeQuestListForHours(listLength);
 
                     result = calculator.GetListOfTimesAndQuests().Replace("\n", "<br/>");
-
+                    mainModel.QuestList = result;
                     return result;
 
                 default:
@@ -80,7 +80,7 @@ namespace Calculator.Controllers
 
                 TempData["QuestFilters"] = filters;
 
-                string s = Helpers.RemoveQuestsFromQuestList(model.QuestList, filters);
+                string s = Helpers.RemoveQuestsFromQuestList(mainModel.QuestList??model.QuestList, filters);
                 return s;
             }
             else return TempData["QuestList"]?.ToString();
