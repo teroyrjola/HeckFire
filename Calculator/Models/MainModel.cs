@@ -11,7 +11,7 @@ namespace Calculator.Models
 
         [Display(Name = "Enter hours: ")]
         public string Hours { get; set; }
-        [Display(Name = "Enter length of a quest list: ")]
+        [Display(Name = "Enter hours of a quest list: ")]
         public string QuestListLength { get; set; }
 
         private string questList;

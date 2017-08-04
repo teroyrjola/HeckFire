@@ -141,7 +141,7 @@
                         UnCheck(button);
                     } else {
                         Check(button);
-                        //IfAllTrueThenEnableAll(imageButtons);
+                        IfAllTrueThenEnableAll(imageButtons);
                     }
                 });
         }
@@ -159,18 +159,18 @@
             return true;
         }
 
-        //var IfAllTrueThenEnableAll = function (buttons) {
+        var IfAllTrueThenEnableAll = function (buttons) {
 
-        //    for (i = 0; i < buttons.length; i++) {
-        //        if (buttons[i].getAttribute("aria-checked") === "false") return true;
-        //    }
+            for (i = 0; i < buttons.length; i++) {
+                if (buttons[i].getAttribute("aria-checked") === "false") return true;
+            }
 
-        //    for (i = 0; i < buttons.length; i++) {
-        //        UnCheck(buttons[i]);
-        //    }
+            for (i = 0; i < buttons.length; i++) {
+                UnCheck(buttons[i]);
+            }
 
-        //    return true;
-        //}
+            return true;
+        }
 
         var UnCheck = function(button) {
             button.setAttribute("aria-checked", "false");
