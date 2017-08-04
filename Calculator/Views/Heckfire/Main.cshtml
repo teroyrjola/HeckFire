@@ -20,7 +20,7 @@
                 resultAjaxOptions.InsertionMode = InsertionMode.Replace;
 
                 AjaxOptions questListAjaxOptions = new AjaxOptions();
-                questListAjaxOptions.HttpMethod = "POST";
+                questListAjaxOptions.HttpMethod = "GET";
                 questListAjaxOptions.UpdateTargetId = "list";
                 questListAjaxOptions.InsertionMode = InsertionMode.Replace;
              }
@@ -50,7 +50,7 @@
                 }
             </div>
             <div class="control" id="getQuestList">
-                @using (Ajax.BeginForm("Calculate", "HeckFire", questListAjaxOptions))
+                @using (Ajax.BeginForm("GetQuestList", "HeckFire", questListAjaxOptions))
             {
                     @Html.LabelFor(model => model.QuestListLength)
                     @Html.TextBoxFor(model => model.QuestListLength, new { autocomplete = "off" })
