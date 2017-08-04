@@ -34,6 +34,9 @@ namespace HeckFire
             return $"{questStartTime}:05 - {nextHour:00}:00";
         }
 
+        /// <summary>
+        /// returns true if the array is too old (questTimeArray[0].Time != currentTime.Hours), too short (under 12) or null
+        /// </summary>
         public static bool IsInvalid(this QuestTimePair[] questTimeArray)
         {
             return questTimeArray == null || questTimeArray.Length < 12 ||
@@ -61,6 +64,11 @@ namespace HeckFire
             return String.Join("\n", questListList);
         }
 
+        /// <summary>
+        /// Adjusts the filters in the following way: If nothing is checked --> check everything except the clicked button
+        ///                                           Else if only the clicked one is checked --> uncheck everything
+        ///                                           Else change the clicked button's checked-value
+        /// </summary>      
         public static QuestFilters ChangeBoolean(QuestFilters filters, string questName)
         {
             var falseValues = filters.ReturnFalseFilters();
@@ -77,7 +85,7 @@ namespace HeckFire
 
         private static QuestFilters ChangeAllButClicked(QuestFilters filters, string questName)
         {
-            for(int i = 0; i < filters.Count; i++)
+            for (int i = 0; i < filters.Count; i++)
             {
                 var key = filters.ElementAt(i).Key;
                 if (key != questName) filters[key] = !filters[key];
@@ -85,9 +93,12 @@ namespace HeckFire
             return filters;
         }
 
+        /// <summary>
+        /// Add a line between every day in the given questlist
+        /// </summary>
         public static string AddDate(string hoursWithQuests)
         {
-            hoursWithQuests =  hoursWithQuests.Replace("00:05 - 01:00:", "-------------------------------------\n00:05 - 01:00:");
+            hoursWithQuests = hoursWithQuests.Replace("00:05 - 01:00:", "-------------------------------------\n00:05 - 01:00:");
             return hoursWithQuests;
         }
 
