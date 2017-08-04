@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Calculator.Models;
+using WebGrease.Css.Extensions;
 
 namespace HeckFire
 {
@@ -43,7 +44,7 @@ namespace HeckFire
         {
             List<string> questListList = questListString.Split(new string[] { "\r\n", "\n", "<br/>" }, StringSplitOptions.None).ToList();
 
-            string[] questsToBeFiltered = QuestFilters.ReturnFalseProperties(filters);
+            string[] questsToBeFiltered = filters.ReturnFalseFilters();
 
             for (int i = questListList.Count - 1; i >= 0; i--)
             {
@@ -62,76 +63,25 @@ namespace HeckFire
 
         public static QuestFilters ChangeBoolean(QuestFilters filters, string questName)
         {
-            if (filters.Construction && filters.MightGrowth && filters.MonsterSlaying &&
-                filters.Researching && filters.ResourceGathering && filters.TroopTraining)
-                switch (questName)
-                {
-                    case "Construction":
-                        filters.TroopTraining = !filters.TroopTraining;
-                        filters.MonsterSlaying = !filters.MonsterSlaying;
-                        filters.ResourceGathering = !filters.ResourceGathering;
-                        filters.Researching = !filters.Researching;
-                        filters.MightGrowth = !filters.MightGrowth;
-                        break;
-                    case "Troop training":
-                        filters.Construction = !filters.Construction;
-                        filters.MonsterSlaying = !filters.MonsterSlaying;
-                        filters.ResourceGathering = !filters.ResourceGathering;
-                        filters.Researching = !filters.Researching;
-                        filters.MightGrowth = !filters.MightGrowth;
-                        break;
-                    case "Monster slaying":
-                        filters.Construction = !filters.Construction;
-                        filters.TroopTraining = !filters.TroopTraining;
-                        filters.ResourceGathering = !filters.ResourceGathering;
-                        filters.Researching = !filters.Researching;
-                        filters.MightGrowth = !filters.MightGrowth;
-                        break;
-                    case "Resource gathering":
-                        filters.Construction = !filters.Construction;
-                        filters.TroopTraining = !filters.TroopTraining;
-                        filters.MonsterSlaying = !filters.MonsterSlaying;
-                        filters.Researching = !filters.Researching;
-                        filters.MightGrowth = !filters.MightGrowth;
-                        break;
-                    case "Researching":
-                        filters.Construction = !filters.Construction;
-                        filters.TroopTraining = !filters.TroopTraining;
-                        filters.MonsterSlaying = !filters.MonsterSlaying;
-                        filters.ResourceGathering = !filters.ResourceGathering;
-                        filters.MightGrowth = !filters.MightGrowth;
-                        break;
-                    case "Might growth":
-                        filters.Construction = !filters.Construction;
-                        filters.TroopTraining = !filters.TroopTraining;
-                        filters.MonsterSlaying = !filters.MonsterSlaying;
-                        filters.ResourceGathering = !filters.ResourceGathering;
-                        break;
-                }
+            var falseValues = filters.ReturnFalseFilters();
 
+            if (falseValues.Length == 0 || (falseValues.Length == 5 && !falseValues.Contains(questName)))
+                ChangeAllButClicked(filters, questName);
             else
-                switch (questName)
-                {
-                    case "Construction":
-                        filters.Construction = !filters.Construction;
-                        break;
-                    case "Troop training":
-                        filters.TroopTraining = !filters.TroopTraining;
-                        break;
-                    case "Monster slaying":
-                        filters.MonsterSlaying = !filters.MonsterSlaying;
-                        break;
-                    case "Resource gathering":
-                        filters.ResourceGathering = !filters.ResourceGathering;
-                        break;
-                    case "Researching":
-                        filters.Researching = !filters.Researching;
-                        break;
-                    case "Might growth":
-                        filters.MightGrowth = !filters.MightGrowth;
-                        break;
-                }
+            {
+                filters[questName] = !filters[questName];
+            }
 
+            return filters;
+        }
+
+        private static QuestFilters ChangeAllButClicked(QuestFilters filters, string questName)
+        {
+            for(int i = 0; i < filters.Count; i++)
+            {
+                var key = filters.ElementAt(i).Key;
+                if (key != questName) filters[key] = !filters[key];
+            }
             return filters;
         }
 
@@ -139,6 +89,19 @@ namespace HeckFire
         {
             hoursWithQuests =  hoursWithQuests.Replace("00:05 - 01:00:", "-------------------------------------\n00:05 - 01:00:");
             return hoursWithQuests;
+        }
+
+
+        public static string[] ReturnFalseFilters(this QuestFilters filters)
+        {
+            List<string> falseProperties = new List<string>();
+
+            foreach (var kvp in filters)
+            {
+                if (!kvp.Value) falseProperties.Add(kvp.Key);
+            }
+
+            return falseProperties.ToArray();
         }
     }
 }
