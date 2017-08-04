@@ -51,18 +51,6 @@ namespace Calculator.Controllers
                     result = calculator.GetQuestAfterHours(model.Hours).Name();
                     break;
 
-                case "GetQuestList":
-                    int listLength = 0;
-                    int.TryParse(model.QuestListLength, out listLength);
-
-                    if (listLength > 24)
-                        calculator.InitializeQuestListForHours(listLength);
-
-                    result = calculator.GetListOfTimesAndQuests().Replace("\n", "<br/>");
-                    string filteredResult = Helpers.RemoveQuestsFromQuestList(result, mainModel.QuestFilters);
-                    mainModel.QuestList = filteredResult;
-                    return filteredResult;
-
                 default:
                     result = "Error";
                     break;
@@ -71,23 +59,39 @@ namespace Calculator.Controllers
             return result;
         }
 
-        [HttpPost]
-        public string Filter(MainModel model, string filterButton)
+        [HttpGet]
+        public string GetQuestList(MainModel model)
         {
-            if (!filterButton.IsNullOrWhiteSpace()) {
-                QuestFilters filters = (QuestFilters)TempData["QuestFilters"] ?? new QuestFilters();
+            int listLength = 0;
+            int.TryParse(model.QuestListLength, out listLength);
 
-                filters = Helpers.ChangeBoolean(filters, filterButton);
+            if (listLength > 24)
+                calculator.InitializeQuestListForHours(listLength);
 
-                TempData["QuestFilters"] = filters;
+            mainModel.QuestListLength = listLength < 24 ? "24" : listLength.ToString();
 
-                mainModel.QuestFilters = filters;
+            string result = calculator.GetListOfTimesAndQuests().Replace("\n", "<br/>");
 
-                string s = Helpers.RemoveQuestsFromQuestList(mainModel.QuestList, filters);
+            string filteredResult = Helpers.RemoveQuestsFromQuestList(result, mainModel.QuestFilters);
+            mainModel.QuestList = filteredResult;
 
-                return s;
+            return filteredResult;
+        }
+
+        [HttpGet]
+        public string Filter(string filterButton)
+        {
+            if (!filterButton.IsNullOrWhiteSpace())
+            {
+                if (mainModel.QuestList.Contains(filterButton) == false) {                                  //If the questlist is filtered
+                    calculator.InitializeQuestListForHours(Convert.ToInt32(mainModel.QuestListLength));     //and doesn't contain the currently
+                    mainModel.QuestList = calculator.GetListOfTimesAndQuests();                             //clicked quest, repopulate.
+                }
+
+                mainModel.QuestFilters = Helpers.ChangeBoolean(mainModel.QuestFilters, filterButton);
             }
-            else return TempData["QuestList"]?.ToString();
+            return Helpers.RemoveQuestsFromQuestList(mainModel.QuestList, mainModel.QuestFilters);
+
         }
     }
 }
