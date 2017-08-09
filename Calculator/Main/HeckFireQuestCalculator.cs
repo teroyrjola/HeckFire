@@ -8,7 +8,7 @@ namespace HeckFire
         public const int DefaultQuestTimePairArrayLength = 24;
 
         private static readonly DateTime KnownStartOfAQuestCycle =
-            new DateTime(2017, 07, 26, 00, 00, 00);
+            new DateTime(2017, 07, 26, 02, 00, 00);
 
         private static QuestTimePair[] HoursWithQuests;
 
@@ -53,7 +53,7 @@ namespace HeckFire
 
             for (int i = 0; i < hours +1; i++)
             {
-                int timeIndex = (i + hoursFromKnownCycle) % Times.Length;
+                int timeIndex = (i + hoursFromKnownCycle + KnownStartOfAQuestCycle.Hour) % Times.Length; // KnownStartOfAQuestCycle.Hour is used to shift the time correctly
                 int questIndex = (i + offSetInCurrentCycle) % QuestCycle.Length;
 
                 HoursWithQuests[i] = new QuestTimePair(Times[timeIndex], QuestCycle[questIndex]);
