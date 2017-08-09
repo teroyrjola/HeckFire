@@ -8,7 +8,7 @@ namespace HeckFire
         public const int DefaultQuestTimePairArrayLength = 24;
 
         private static readonly DateTime KnownStartOfAQuestCycle =
-            new DateTime(2017, 07, 26, 02, 00, 00);
+            new DateTime(2017, 07, 26, 09, 00, 00);
 
         private static QuestTimePair[] HoursWithQuests;
 
