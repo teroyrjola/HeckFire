@@ -253,7 +253,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Heckfire\CalculationResult.cshtml" />
     <Content Include="Views\Heckfire\Main.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -284,7 +283,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>60211</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
